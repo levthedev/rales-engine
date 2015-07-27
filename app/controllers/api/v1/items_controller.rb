@@ -8,6 +8,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def search
-    respond_with Item.find_by(params[0][0] => params[0][1])
+    respond_with Item.find_by(params.first.first => params.first.last)
+  end
+
+  def search_all
+    respond_with Item.where(params.first.first => params.first.last)
   end
 end
