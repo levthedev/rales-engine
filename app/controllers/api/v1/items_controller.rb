@@ -4,6 +4,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    Item.find_by(id: params[:id])
+    respond_with Item.find_by(id: params[:id])
+  end
+
+  def search
+    respond_with Item.find_by(params[0][0] => params[0][1])
   end
 end

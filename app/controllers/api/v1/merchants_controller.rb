@@ -4,6 +4,14 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    Merchant.find_by(id: params[:id])
+    respond_with Merchant.find_by(id: params[:id])
+  end
+
+  def search
+    respond_with Merchant.find_by(params.first.first => params.first.last)
+  end
+
+  def search_all
+    respond_with Merchant.where(params.first.first => params.first.last)
   end
 end

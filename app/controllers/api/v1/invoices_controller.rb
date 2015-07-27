@@ -4,6 +4,6 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def show
-    Invoice.find_by(id: params[:id])
+    respond_with Invoice.find_by(id: params[:id])
   end
 end

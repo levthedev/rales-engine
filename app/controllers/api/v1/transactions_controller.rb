@@ -4,6 +4,6 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def show
-    Transaction.find_by(id: params[:id])
+    respond_with Transaction.find_by(id: params[:id])
   end
 end
