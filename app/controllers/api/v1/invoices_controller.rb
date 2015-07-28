@@ -24,12 +24,6 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def index
-   if params[:merchant_id]
-     respond_with Invoice.where(merchant_id: params[:merchant_id])
-   elsif params[:customer_id]
-     respond_with Invoice.where(customer_id: params[:customer_id])
-   else
-     Invoice.all
-   end
- end
+   Invoice.load_all(params)
+  end
 end

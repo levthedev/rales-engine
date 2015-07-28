@@ -23,6 +23,7 @@ describe Customer, type: :model do
   end
 
   let(:invoice)  { Invoice.create(invoice_attributes)  }
+  let(:invoice2) { Invoice.create(invoice_attributes)  }
   let(:customer) { Customer.create(customer_attributes)}
   let(:merchant) { Merchant.create(merchant_attributes)}
 

@@ -8,13 +8,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def index
-    if params[:invoice_id]
-      respond_with InvoiceItem.where(invoice_id: params[:invoice_id])
-    elsif params[:item_id]
-      respond_with InvoiceItem.where(item_id: params[:item_id])
-    else
-      respond_with InvoiceItem.all
-    end
+    InvoiceItem.load_all(params)
   end
 
   def search
