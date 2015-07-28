@@ -1,10 +1,10 @@
 class Api::V1::MerchantsController < ApplicationController
-  def random
-    respond_with Merchant.all.sample
-  end
-
   def show
     respond_with Merchant.find_by(id: params[:id])
+  end
+
+  def random
+    respond_with Merchant.all.sample
   end
 
   def search

@@ -1,14 +1,14 @@
 class Api::V1::InvoiceItemsController < ApplicationController
-  def random
-    respond_with InvoiceItem.all.sample
-  end
-
   def show
     respond_with InvoiceItem.find_by(id: params[:id])
   end
 
   def index
     InvoiceItem.load_all(params)
+  end
+
+  def random
+    respond_with InvoiceItem.all.sample
   end
 
   def search
