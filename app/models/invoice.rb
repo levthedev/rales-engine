@@ -11,7 +11,11 @@ class Invoice < ActiveRecord::Base
     elsif params[:customer_id]
       respond_with Invoice.where(customer_id: params[:customer_id])
     else
-      Invoice.all
+      all
     end
+  end
+
+  def self.successful
+    joins(:transactions).where(transactions: { result: 'success' })
   end
 end

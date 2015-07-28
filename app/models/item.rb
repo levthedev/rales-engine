@@ -12,4 +12,18 @@ class Item < ActiveRecord::Base
       respond_with Item.all
     end
   end
+
+  def self.most_revenue(count)
+    all.max_by(count.to_i) { |i| i.revenue }.reverse
+   #    hash = Hash.new(0)
+   # all.map do |item|
+   #   hash[item] += item.revenue
+   # end
+   # hash.max(count.to_i)
+
+  end
+
+  def revenue
+    Invoice.successful.joins(:invoice_items).where(invoice_items: {item_id: id}).sum("quantity * unit_price")
+  end
 end

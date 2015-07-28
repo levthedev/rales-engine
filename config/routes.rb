@@ -10,10 +10,14 @@ Rails.application.routes.draw do
         get "/#{controller}/random", to: "#{controller}#random"
       end
 
+      get '/merchants/most_revenue', to: 'merchants#most_revenue'
+      get '/merchants/most_items', to: 'merchants#most_items'
+      get '/merchants/revenue', to: 'merchants#revenue'
+      get '/merchants/:id/favorite_customer', to: 'merchants#favorite_customer'
+      get '/merchants/:id/customers_with_pending_invoices', to: 'merchants#pending'
       resources :merchants, only: [:show] do
         resources :items, only: [:index]
         resources :invoices, only: [:index]
-        get '/most_revenue', to: 'merchants#most_revenue'
       end
 
       resources :customers, only: [:show] do
@@ -21,6 +25,7 @@ Rails.application.routes.draw do
         get '/transactions', to: 'customers#transactions'
       end
 
+      get '/items/most_revenue', to: 'items#most_revenue'
       resources :items, only: [:show] do
         resources :invoice_items, only: [:index]
         get '/merchant', to: 'items#merchant'
