@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       end
 
       get '/items/most_revenue', to: 'items#most_revenue'
+      get '/items/most_items', to: 'items#most_items'
       resources :items, only: [:show] do
         resources :invoice_items, only: [:index]
         get '/merchant', to: 'items#merchant'

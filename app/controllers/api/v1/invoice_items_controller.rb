@@ -4,7 +4,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def index
-    InvoiceItem.load_all(params)
+    respond_with InvoiceItem.load_all(params)
   end
 
   def random

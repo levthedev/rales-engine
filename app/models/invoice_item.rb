@@ -4,11 +4,11 @@ class InvoiceItem < ActiveRecord::Base
 
   def self.load_all(params)
     if params[:invoice_id]
-      respond_with InvoiceItem.where(invoice_id: params[:invoice_id])
+      InvoiceItem.where(invoice_id: params[:invoice_id])
     elsif params[:item_id]
-      respond_with InvoiceItem.where(item_id: params[:item_id])
+      InvoiceItem.where(item_id: params[:item_id])
     else
-      respond_with InvoiceItem.all
+      InvoiceItem.all
     end
   end
 end

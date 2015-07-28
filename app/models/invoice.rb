@@ -7,9 +7,9 @@ class Invoice < ActiveRecord::Base
 
   def self.load_all(params)
     if params[:merchant_id]
-      respond_with Invoice.where(merchant_id: params[:merchant_id])
+      Invoice.where(merchant_id: params[:merchant_id])
     elsif params[:customer_id]
-      respond_with Invoice.where(customer_id: params[:customer_id])
+      Invoice.where(customer_id: params[:customer_id])
     else
       all
     end
