@@ -14,19 +14,10 @@ class Item < ActiveRecord::Base
   end
 
   def self.most_revenue(count)
-    all.max_by(count.to_i) { |i| i.revenue }.reverse
-   # hash = Hash.new(0)
-   # all.map do |item|
-   #   hash[item] += item.revenue
-   # end
-   # hash.max(count.to_i)
+    Item.joins(:invoices).merge(Invoice.successful).group(:name).sum('"invoice_items"."quantity" * "invoice_items"."unit_price"').sort_by(&:last).reverse.take(count.to_i).map {|n, _| Item.find_by(name: n)}
   end
 
   def self.most_items(quantity)
     Item.joins(:invoices).merge(Invoice.successful).group(:name).sum(:quantity).sort_by(&:last).last(quantity.to_i).map { |n, _| Item.find_by(name: n)}
-  end
-
-  def revenue
-    Invoice.successful.joins(:invoice_items).where(invoice_items: {item_id: id}).sum("quantity * unit_price")
   end
 end
