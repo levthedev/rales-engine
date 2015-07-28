@@ -48,5 +48,9 @@ namespace :csv do
       Item.create!(row.to_hash)
     end
   end
+
+  task all: :environment do
+    `rake csv:customers && rake csv:merchants && rake csv:items && rake csv:invoices && rake csv:invoice_items && rake csv:transactions`
+  end
 end
 

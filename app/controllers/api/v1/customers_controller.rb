@@ -16,6 +16,6 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def transactions
-    respond_with Customer.find_by(id: params[:customer_id]).invoices.flat_map { |invoice| invoice.transactions }
+    respond_with Customer.find_by(id: params[:customer_id]).transactions
   end
 end

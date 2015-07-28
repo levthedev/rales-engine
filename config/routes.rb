@@ -2,10 +2,18 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+
+      controllers = %w[merchants customers items invoices transactions invoice_items]
+      controllers.each do |controller|
+        get "/#{controller}/find_all", to: "#{controller}#search_all"
+        get "/#{controller}/find", to: "#{controller}#search"
+        get "/#{controller}/random", to: "#{controller}#random"
+      end
+
+
       get 'merchants/random', to: 'merchants#random'
       get 'merchants/find', to: 'merchants#search'
       get 'merchants/find_all', to: 'merchants#find_all'
-      get 'merchants/most_revenue', to: 'merchants#top_revenue'
       resources :merchants, only: [:show] do
         resources :items, only: [:index]
         resources :invoices, only: [:index]
