@@ -14,4 +14,8 @@ class Api::V1::MerchantsController < ApplicationController
   def search_all
     respond_with Merchant.where(params.first.first => params.first.last)
   end
+
+  def most_revenue
+    respond_with Merchant.most_revenue(params[:quantity])
+  end
 end
