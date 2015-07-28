@@ -20,4 +20,12 @@ class Item < ActiveRecord::Base
   def self.most_items(quantity)
     Item.joins(:invoices).merge(Invoice.successful).group(:name).sum(:quantity).sort_by(&:last).last(quantity.to_i).map { |n, _| Item.find_by(name: n)}
   end
+
+  def revenue(date)
+   invoices.successful.joins(:invoice_items).sum('"invoice_items"."quantity" * "invoice_items"."unit_price"')
+  end
+
+  def best_day
+
+  end
 end

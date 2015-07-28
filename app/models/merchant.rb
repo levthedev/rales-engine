@@ -4,11 +4,11 @@ class Merchant < ActiveRecord::Base
   has_many :customers, through: :invoices
 
   def total_revenue
-    invoices.successful.joins(:invoice_items).sum("quantity * unit_price").to_i
+    invoices.successful.joins(:invoice_items).sum("quantity * unit_price").to_f
   end
 
   def total_items
-    invoices.successful.joins(:invoice_items).sum("quantity").to_i
+    invoices.successful.joins(:invoice_items).sum("quantity").to_f
   end
 
   def self.most_revenue(quantity)
@@ -24,14 +24,12 @@ class Merchant < ActiveRecord::Base
   end
 
   def revenue(date)
-    invoices.successful.where(created_at: date).joins(:invoice_items).sum("quantity * unit_price").to_i
+    invoices.successful.where(created_at: date).joins(:invoice_items).sum("quantity * unit_price").to_f
   end
 
   def favorite_customer
     hash = Hash.new(0)
-    customers.map do |c|
-      hash[c] += 1
-    end
+    customers.map { |c| hash[c] += 1 }
     hash.max
   end
 
