@@ -9,6 +9,6 @@ class Customer < ActiveRecord::Base
  def favorite_merchant
     hash = Hash.new(0)
     merchants.map { |m| hash[m] += 1 }
-    hash.max
+    hash.max.first
   end
 end

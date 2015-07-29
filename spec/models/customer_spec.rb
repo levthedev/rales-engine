@@ -43,7 +43,6 @@ describe Customer, type: :model do
   it 'should have many transactions' do
     transaction = Transaction.create({invoice_id: invoice.id,
                                       credit_card_number: "4397199533314394",
-                                      credit_card_expiration_date: nil,
                                       result: "success",
                                       created_at: "2012-03-27 14:58:15",
                                       updated_at: "2012-03-27 14:58:15"})

@@ -4,7 +4,7 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def index
-    respond_with Transaction.where(invoice_id: params[:invoice_id])
+    respond_with Transaction.load_all(params)
   end
 
   def random
