@@ -5,7 +5,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/customers.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      Customer.create!(row.to_hash)
+      Customer.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 
@@ -13,7 +13,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/transactions.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      Transaction.create!(row.to_hash)
+      Transaction.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 
@@ -21,7 +21,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/invoices.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      Invoice.create!(row.to_hash)
+      Invoice.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 
@@ -29,7 +29,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/invoice_items.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      InvoiceItem.create!(row.to_hash)
+      InvoiceItem.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 
@@ -37,7 +37,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/merchants.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      Merchant.create!(row.to_hash)
+      Merchant.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 
@@ -45,7 +45,7 @@ namespace :csv do
     csv_text = File.read('./public/csv/items.csv')
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      Item.create!(row.to_hash)
+      Item.create!(row.to_hash.except("id", "credit_card_expiration_date"))
     end
   end
 

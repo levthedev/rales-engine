@@ -3,15 +3,19 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find_by(id: params[:id])
   end
 
+  def index
+    respond_with Merchant.all
+  end
+
   def random
     respond_with Merchant.all.sample
   end
 
-  def search
+  def find
     respond_with Merchant.find_by(params.first.first => params.first.last)
   end
 
-  def search_all
+  def find_all
     respond_with Merchant.where(params.first.first => params.first.last)
   end
 

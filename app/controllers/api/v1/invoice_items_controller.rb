@@ -11,11 +11,11 @@ class Api::V1::InvoiceItemsController < ApplicationController
     respond_with InvoiceItem.all.sample
   end
 
-  def search
+  def find
     respond_with InvoiceItem.find_by(params.first.first => params.first.last)
   end
 
-  def search_all
+  def find_all
     respond_with InvoiceItem.where(params.first.first => params.first.last)
   end
 

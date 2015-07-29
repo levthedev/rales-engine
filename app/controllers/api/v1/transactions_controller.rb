@@ -11,11 +11,11 @@ class Api::V1::TransactionsController < ApplicationController
     respond_with Customer.all.sample
   end
 
-  def search
+  def find
     respond_with Transaction.find_by(params.first.first => params.first.last)
   end
 
-  def search_all
+  def find_all
     respond_with Transaction.where(params.first.first => params.first.last)
   end
 
