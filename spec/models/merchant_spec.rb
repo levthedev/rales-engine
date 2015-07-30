@@ -54,5 +54,13 @@ describe Merchant, type: :model do
     expect(merchant.items.include?(item)).to be(true)
     expect(merchant.items.count).to be(1)
   end
+
+  it 'should have total revenue' do
+    expect(merchant.total_revenue).to eq(0.0)
+  end
+
+  it 'should have total items' do
+    expect(merchant.total_items).to eq(0.0)
+  end
 end
 

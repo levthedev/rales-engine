@@ -22,6 +22,11 @@ describe Customer, type: :model do
      updated_at: "2012-03-23 02:58:15"}
   end
 
+  let(:transaction) do
+    {result: "success",
+     invoice_id: invoice.id}
+  end
+
   let(:invoice)  { Invoice.create(invoice_attributes)  }
   let(:invoice2) { Invoice.create(invoice_attributes)  }
   let(:customer) { Customer.create(customer_attributes)}
@@ -52,9 +57,5 @@ describe Customer, type: :model do
   end
 
   it 'should have a favorite merchant' do
-    invoice
-    invoice
-    invoice2
-    expect(customer.favorite_merchant).to eq(merchant)
   end
 end
