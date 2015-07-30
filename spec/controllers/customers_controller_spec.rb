@@ -1,57 +1,33 @@
-
 require 'rails_helper'
 
 describe Api::V1::CustomersController do
-
-  let(:johnny) { Customer.create(first_name: "Johnny",
-                                 last_name:  "Walker",
-                                 created_at: "2012-03-27 14:58:07",
-                                 updated_at: "2012-03-27 14:58:07") }
-  let(:jorge)  { Customer.create(first_name: "Jorge",
-                                 last_name:  "Bieber",
-                                 created_at: "2012-03-27 14:58:07",
-                                 updated_at: "2012-03-27 14:58:07") }
-
-  before(:each) do
-    johnny
-    jorge
-  end
-
   context '#index' do
     it 'returns all the customers' do
+      Customer.create(first_name: 'Lev', last_name: 'Kravinsky')
+
       get :index, format: :json
 
       expect(response).to have_http_status(:ok)
-
       customers = JSON.parse(response.body)
+      expect(customers.count).to eq(1)
 
-      expect(customers.count).to eq(2)
-      expect(customers.first['first_name']).to eq("Johnny")
-      expect(customers.last['first_name']).to eq("Jorge")
+      customer = customers.first
+      expect(customer['first_name']).to eq('Lev')
+      expect(customer['last_name']).to eq('Kravinsky')
     end
   end
 
-  context '#random' do
-    it 'returns a random sample customer' do
-      get :random, format: :json
+  context '#show' do
+    it 'returns a merchant' do
+      customer = Customer.create(first_name: 'Lev', last_name: 'Kravinsky')
+
+      get :show, id: customer.id, format: :json
 
       expect(response).to have_http_status(:ok)
-
       customer = JSON.parse(response.body)
 
-      expect(customer['first_name']).to eq("Johnny" || "Jorge")
-    end
-  end
-
-  context '#find' do
-    it 'returns the customer thats been searched' do
-      get :find, id: johnny.id, format: :json
-
-      expect(response).to have_http_status(:ok)
-
-      customer = JSON.parse(response.body)
-
-      expect(customer['first_name']).to eq("Johnny")
+      expect(customer['first_name']).to eq('Lev')
+      expect(customer['last_name']).to eq('Kravinsky')
     end
   end
 end
