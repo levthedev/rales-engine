@@ -6,9 +6,12 @@ class Customer < ActiveRecord::Base
     invoices.flat_map { |invoice| invoice.transactions }
   end
 
- def favorite_merchant
-    hash = Hash.new(0)
-    merchants.map { |m| hash[m] += 1 }
-    hash.max.first
+  def favorite_merchant
+    merchant_id = calculate_favorite_merchant
+    Merchant.find_by(id: merchant_id)
+  end
+
+  def calculate_favorite_merchant
+    invoices.successful.group(:merchant_id).count(:merchant_id).sort_by(&:last).last[0]
   end
 end

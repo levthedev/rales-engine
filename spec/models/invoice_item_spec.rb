@@ -63,4 +63,10 @@ describe InvoiceItem, type: :model do
   it 'should have an item' do
     expect(invoice_item.item).to eq(item)
   end
+
+  it 'should load all invoice items' do
+    invoice_item
+    loaded_item = InvoiceItem.load_all({item_id: item.id})
+    expect(loaded_item.first).to eq(invoice_item)
+  end
 end

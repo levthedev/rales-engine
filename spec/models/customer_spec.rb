@@ -26,6 +26,7 @@ describe Customer, type: :model do
   let(:invoice2) { Invoice.create(invoice_attributes)  }
   let(:customer) { Customer.create(customer_attributes)}
   let(:merchant) { Merchant.create(merchant_attributes)}
+  let(:merchant2) { Merchant.create(merchant_attributes)}
 
   it 'responds to invoices' do
     expect(customer).to respond_to(:invoices)
@@ -48,5 +49,12 @@ describe Customer, type: :model do
                                       updated_at: "2012-03-27 14:58:15"})
     expect(customer.transactions.include?(transaction)).to be(true)
     expect(customer.transactions.count).to be(1)
+  end
+
+  it 'should have a favorite merchant' do
+    invoice
+    invoice
+    invoice2
+    expect(customer.favorite_merchant).to eq(merchant)
   end
 end

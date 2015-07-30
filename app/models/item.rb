@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  require 'date'
+
   belongs_to :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
@@ -26,6 +28,7 @@ class Item < ActiveRecord::Base
   end
 
   def best_day
-    invoices.successful.group('"invoices"."created_at"').sum("quantity * unit_price").sort_by(&:last).last.first
+    date = invoices.successful.group('"invoices"."created_at"').sum("quantity * unit_price").sort_by(&:last).last.first
+    Date.parse(date.to_s).ctime
   end
 end

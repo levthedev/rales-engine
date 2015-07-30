@@ -20,11 +20,11 @@ class Merchant < ActiveRecord::Base
   end
 
   def self.revenue(date)
-    { revenue: all.map { |merchant| merchant.revenue(date) }.reduce(0) { |merch_rev| merch_rev } }.to_json
+    all.map { |merchant| merchant.revenue(date) }.reduce(0) { |merch_rev| merch_rev }
   end
 
   def revenue(date)
-    { revenue: invoices.successful.where(created_at: date).joins(:invoice_items).sum("quantity * unit_price").to_f }.to_json
+    invoices.successful.where(created_at: date).joins(:invoice_items).sum("quantity * unit_price").to_f
   end
 
   def favorite_customer
