@@ -20,7 +20,7 @@ class Merchant < ActiveRecord::Base
   end
 
   def self.revenue(date)
-    { total_revenue: all.map { |merchant| merchant.revenue(date) }.reduce(0) {|merch_rev| merch_rev} }
+    { revenue: all.map { |merchant| merchant.revenue(date) }.reduce(0) { |merch_rev| merch_rev } }.to_json
   end
 
   def revenue(date)
